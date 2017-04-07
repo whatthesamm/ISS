@@ -1,5 +1,8 @@
-/**
- * Created by sam on 4/3/17.
- */
-public class Event {
+// Priority Queue and Simulation
+// Event is the generic interface for a runnable agenda object.
+
+public interface Event {
+
+    void run();
+
 }

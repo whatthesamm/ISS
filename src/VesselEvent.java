@@ -1,5 +1,8 @@
 /**
- * Created by sam on 4/3/17.
+ * Created by sam on 4/6/17.
  */
-public class VesselEvent {
+public class VesselEvent implements Event {
+    public void run(){
+
+    }
 }
