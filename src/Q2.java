@@ -70,6 +70,10 @@ public class Q2 implements Q {
         return size;
     }
 
+    public Object getLast(){
+        return q[rear];
+    }
+
     private Object[] q;
     private int size;  // number of items in the array
     private int front;  // first element
