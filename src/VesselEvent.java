@@ -1,9 +1,7 @@
 //Written by maten009 and nguy2886
 public class VesselEvent implements Event {
     private Port port;
-    private int capacity;
-    private int speed;
-    private int cost;
+    private int capacity, speed, cost;
 
     public VesselEvent(Port port, int capacity, int speed, int cost){
         this.port = port;
