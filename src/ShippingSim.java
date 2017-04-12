@@ -1,20 +1,20 @@
 //Written by maten009 and nguy2886
-public class ShippingSim{
+public class ShippingSim {
     //Agenda for storing our events in when we run main()
     static PQ agenda = new PQ();
 
     //A list of ports, so we can easily access it
     static Port[] portList = { //Port(name, x, y, genRate)
-            new Port("Minneapolis", 0,0,50),
-            new Port("Saint Paul",0,10,50),
-            new Port("Antarctica",0,-6000,10),
-            new Port("Japan",4000,4000,100),
-            new Port("Korea",6000,5000,50),
-            new Port("China",5000,6000,1000),
-            new Port("Moon",0,1000000,0), //********We need to figure out how to make this only have a .001 chance or 0.1% chance being picked as the destination*******
-            new Port("Panama",1000,3000,50),
-            new Port("Hawaii",2000,2000,50),
-            new Port("Pirate Town",3000,3000,100)
+            new Port("Minneapolis", 0, 0, 50),
+            new Port("Saint Paul", 0, 10, 50),
+            new Port("Antarctica", 0, -6000, 10),
+            new Port("Japan", 4000, 4000, 100),
+            new Port("Korea", 6000, 5000, 50),
+            new Port("China", 5000, 6000, 1000),
+            new Port("Moon", 0, 1000000, 0), //********We need to figure out how to make this only have a .001 chance or 0.1% chance being picked as the destination*******
+            new Port("Panama", 1000, 3000, 50),
+            new Port("Hawaii", 2000, 2000, 50),
+            new Port("Pirate Town", 3000, 3000, 100)
     };
 
     //A list of vessels, so we can easily access it
@@ -30,8 +30,8 @@ public class ShippingSim{
     };
 
     //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
-    public static void main(String[] args){
-        while (agenda.getCurrentTime() <= 10000){ //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
+    public static void main(String[] args) {
+        while (agenda.getCurrentTime() <= 10000) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
     }

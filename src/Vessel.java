@@ -4,14 +4,14 @@ public class Vessel {
     private int capacity, speed, cost;
     private Port destination;
 
-    public Vessel(String name, int capacity, int speed, int cost){
+    public Vessel(String name, int capacity, int speed, int cost) {
         this.name = name;
         this.capacity = capacity;
         this.speed = speed;
         this.cost = cost;
     }
 
-    public boolean removeCargo(){
+    public boolean removeCargo() {
         return false;
     }
 

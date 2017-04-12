@@ -5,7 +5,7 @@ public class Shipment {
     private double creationTime;
     private Port destination;
 
-    public Shipment(int weight, double creationTime, Port destination){
+    public Shipment(int weight, double creationTime, Port destination) {
         this.weight = weight;
         this.creationTime = creationTime;
         this.destination = destination;
