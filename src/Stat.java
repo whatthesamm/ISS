@@ -1,5 +1,9 @@
 //Written by maten009 and nguy2886
 public class Stat {
-    int weightDelivered = 0;
+    //Variables
+    static int weightDelivered = 0;
+    static int W = 0; //Maximum time a shipment spends waiting at a part
+    static int P = 0; //Average profit per shipment
+    static int shipped = 0; //How many was shipped
 
 }
