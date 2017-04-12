@@ -4,17 +4,17 @@ public class ShippingSim{
     static PQ agenda = new PQ();
 
     //A list of ports, so we can easily access it
-    static Port[] portList = { //Port(x, y, name, genRate)
-            new Port(0,0,"Minneapolis",50),
-            new Port(0,10,"Saint Paul",50),
-            new Port(0,-6000,"Antarctica",10),
-            new Port(4000,4000,"Japan",100),
-            new Port(6000,5000,"Korea",50),
-            new Port(5000,6000,"China",1000),
-            new Port(0,1000000,"Moon",0),
-            new Port(1000,3000,"Panama",50),
-            new Port(2000,2000,"Hawaii",50),
-            new Port(3000,3000,"Pirate Town",100)
+    static Port[] portList = { //Port(name, x, y, genRate)
+            new Port("Minneapolis", 0,0,50),
+            new Port("Saint Paul",0,10,50),
+            new Port("Antarctica",0,-6000,10),
+            new Port("Japan",4000,4000,100),
+            new Port("Korea",6000,5000,50),
+            new Port("China",5000,6000,1000),
+            new Port("Moon",0,1000000,0), //********We need to figure out how to make this only have a .001 chance or 0.1% chance being picked as the destination*******
+            new Port("Panama",1000,3000,50),
+            new Port("Hawaii",2000,2000,50),
+            new Port("Pirate Town",3000,3000,100)
     };
 
     //A list of vessels, so we can easily access it

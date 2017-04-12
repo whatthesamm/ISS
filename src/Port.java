@@ -12,7 +12,7 @@ public class Port {
 
     private int portNum;
 
-    public Port(int portX, int portY, String name, int genRate) {
+    public Port(String name, int portX, int portY, int genRate) {
         this.name = name;
         this.location[0] = portX;
         this.location[1] = portY;
