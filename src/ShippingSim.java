@@ -1,10 +1,10 @@
 //Written by maten009 and nguy2886
 public class ShippingSim{
-
+    //Agenda for storing our events in when we run main()
     static PQ agenda = new PQ();
 
-    //Port(x, y, name, genRate)
-    static Port[] portList = {
+    //A list of ports, so we can easily access it
+    static Port[] portList = { //Port(x, y, name, genRate)
             new Port(0,0,"Minneapolis",50),
             new Port(0,10,"Saint Paul",50),
             new Port(0,-6000,"Antarctica",10),
@@ -17,8 +17,8 @@ public class ShippingSim{
             new Port(3000,3000,"Pirate Town",100)
     };
 
-    //Vessel(name, capacity, speed, cost)
-    static Vessel[] vesselList = {
+    //A list of vessels, so we can easily access it
+    static Vessel[] vesselList = { //Vessel(name, capacity, speed, cost)
             new Vessel("Canoe", 1000, 10, 1),
             new Vessel("Yacht", 2000, 60, 2000),
             new Vessel("Galleon", 15000, 15, 100),
@@ -29,8 +29,9 @@ public class ShippingSim{
             new Vessel("Rocket", 10000, 2000, 100000)
     };
 
+    //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
     public static void main(String[] args){
-        while (agenda.getCurrentTime() <= 10000){
+        while (agenda.getCurrentTime() <= 10000){ //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
     }
