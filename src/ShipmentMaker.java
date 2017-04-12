@@ -1,6 +1,4 @@
-/**
- * Created by sam on 4/6/17.
- */
+//Written by maten009 and nguy2886
 public class ShipmentMaker implements Event {
 
     private Port port;

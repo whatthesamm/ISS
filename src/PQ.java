@@ -6,7 +6,7 @@
 // Additions are always made at a time specified relative to current time 
 // indicated by time stamp in first time segment (queue) in the priority queue.
 // Uses class Q1 (Queue class using linked list) and class Segment
-
+//From CSCI1933 Week 9 Folder
 public class PQ implements PQInterface {
 
     // constructor

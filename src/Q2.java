@@ -1,7 +1,7 @@
 // Example 27
 // Queue implementation using an Array
 // Revised November 2016
-
+//From CSCI1933 Week 9 Folder
 public class Q2 implements Q {
 
     // constructors

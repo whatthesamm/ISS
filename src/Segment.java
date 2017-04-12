@@ -2,7 +2,7 @@
 // Priority Queue and Simulation
 // Segment class used in priority queue (PQ.java)
 // Uses queue class Q1.java
-
+//From CSCI1933 Week 9 Folder
 public class Segment {
 
     private double time;

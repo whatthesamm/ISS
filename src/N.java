@@ -2,7 +2,7 @@
 // A *simplified* node class for use with the Stack1 class 
 // and other uses as desired
 // Posted previously, but used for simulation
-
+//From CSCI1933 Week 9 Folder
 public class N {
   
     // constructors
