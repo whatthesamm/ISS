@@ -45,5 +45,6 @@ public class Port {
     public double[] getLocation() {
         return location;
     }
+    public String getName() { return name; }
 }
 
