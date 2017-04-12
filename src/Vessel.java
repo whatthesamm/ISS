@@ -1,12 +1,11 @@
 //Written by maten009 and nguy2886
 public class Vessel {
-
-    private int capacity;
-    private int speed;
-    private int cost;
+    private String name;
+    private int capacity, speed, cost;
     private Port destination;
 
-    public Vessel(int capacity, int speed, int cost){
+    public Vessel(String name, int capacity, int speed, int cost){
+        this.name = name;
         this.capacity = capacity;
         this.speed = speed;
         this.cost = cost;
