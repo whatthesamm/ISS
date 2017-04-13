@@ -30,13 +30,15 @@ public class Port {
         int oldestIndex = -1;
         double oldestTime = -1;
         for (int i = 0; i < shipmentList.length; i++) {
-            Shipment temp = (Shipment) shipmentList[i].getLast();
-            if (oldestIndex == -1) {
-                oldestIndex = i;
-                oldestTime = temp.getCreationTime();
-            } else if (oldestTime > temp.getCreationTime()) {
-                oldestIndex = i;
-                oldestTime = temp.getCreationTime();
+            if (shipmentList[i].length() > 0) {
+                Shipment temp = (Shipment) shipmentList[i].getFirst();
+                if (oldestIndex == -1) {
+                    oldestIndex = i;
+                    oldestTime = temp.getCreationTime();
+                } else if (oldestTime > temp.getCreationTime()) {
+                    oldestIndex = i;
+                    oldestTime = temp.getCreationTime();
+                }
             }
         }
         return oldestIndex;

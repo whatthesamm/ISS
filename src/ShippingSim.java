@@ -31,7 +31,9 @@ public class ShippingSim {
 
     //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
     public static void main(String[] args) {
-        while (agenda.getCurrentTime() <= 10000) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
+        agenda.add(new VesselEvent(portList[4], vesselList[0]),20);
+
+        while (agenda.getCurrentTime() <= 5000) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
     }
