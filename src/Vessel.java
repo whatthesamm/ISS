@@ -52,4 +52,8 @@ public class Vessel {
         }
         return temp + cargo.getWeight() < capacity;
     }
+
+    public int getCost(){
+        return cost;
+    }
 }

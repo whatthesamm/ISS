@@ -22,8 +22,9 @@ public class VesselEvent implements Event {
             }
         }
         //Calculate time to destination
-        double distance = Math.sqrt(Math.pow(port.getLocation()[0] - destination.getLocation()[0], 2) + Math.pow(port.getLocation()[1] - destination.getLocation()[1], 2));
-        int elapsedTime = (int) Math.ceil(distance / vessel.getSpeed());
+        int distance = (int)(Math.sqrt(Math.pow(port.getLocation()[0] - destination.getLocation()[0], 2) + Math.pow(port.getLocation()[1] - destination.getLocation()[1], 2)));
+        int elapsedTime = (int) Math.ceil(distance / (vessel.getSpeed() * 24));
+        int runCost = distance / vessel.getCost();
 
         //Add the next VesselEvent
         ShippingSim.agenda.add(new VesselEvent(destination,vessel),elapsedTime);
