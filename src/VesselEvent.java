@@ -2,25 +2,31 @@
 public class VesselEvent implements Event {
     private Port port;
     private Vessel vessel;
+    private int waitTime;
 
-    public VesselEvent(Port port, Vessel vessel) {
+    public VesselEvent(Port port, Vessel vessel, int waitTime) {
         this.port = port;
         this.vessel = vessel;
+        this.waitTime = waitTime;
     }
 
     public void run() {
+        //Remove cargo
         int temp = vessel.removeCargo();
         int dest = port.getOldestShipmentDest();
-        if (dest == -1) { //If the ship is at the moon
+        if (dest == -1) { //If the ship is at the moon, choose a random port to go to
             dest = (int) (Math.random() * 9);
-
         }
+
         Port destination = ShippingSim.portList[(dest + port.getPortNum()+ 1)%10];
+
+        //Add cargo
         if (!port.getName().equals("Moon")) {
             while (vessel.willItFit((Shipment) port.shipmentList[dest].getFirst())) {
                 vessel.addCargo((Shipment) port.shipmentList[dest].remove());
             }
         }
+
         //Calculate time to destination
         int distance = (int)(Math.sqrt(Math.pow(port.getLocation()[0] - destination.getLocation()[0], 2) + Math.pow(port.getLocation()[1] - destination.getLocation()[1], 2)));
         int elapsedTime = (int) Math.ceil(distance / (vessel.getSpeed() * 24));
