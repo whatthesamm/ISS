@@ -17,8 +17,9 @@ public class Port {
         this.location[0] = portX;
         this.location[1] = portY;
         this.genRate = genRate;
-        if (!name.equals("Moon"))
+        if (!name.equals("Moon")) {
             ShippingSim.agenda.add(new ShipmentMaker(this, genRate), 0); //Instantiate instance of shipmentMaker for each port (except moon)
+        }
         portNum = counter++; //Assign portNum to port in order each port is added
         shipmentList = new Q2[9];
         for (int i = 0; i < 9; i++) {
