@@ -19,10 +19,16 @@ public class Vessel {
         this.cost = cost;
     }
 
-    public void removeCargo() {
+    public void removeCargo(boolean PirateTown) {
         Stat.weightDelivered += currentWeight;
         currentWeight = 0;
         numCargo = 0;
+        if (PirateTown) { //If PirateTown is the destination
+            int chance = (int) (Math.random() * 10) % 10; //10% chance, hence 1/10
+            if (chance == 0){
+                //No profits gained
+            }
+        }
     }
 
     //Need to add loading method, make sure it loads the queue with the oldest shipment
