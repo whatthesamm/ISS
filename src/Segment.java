@@ -6,14 +6,14 @@
 public class Segment {
 
     private double time;
-    private Q2 q;
+    private Queue q;
     private Segment next;
 
     // constructor
 
     public Segment(double t) {
         time = t;
-        q = new Q2();
+        q = new Queue();
         next = null;
     }
 
@@ -23,7 +23,7 @@ public class Segment {
         return time;
     }
 
-    public Q2 getEvents() {
+    public Queue getEvents() {
         return q;
     }
 

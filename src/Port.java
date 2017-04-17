@@ -3,7 +3,7 @@ public class Port {
     private String name;
     private double[] location = new double[2]; //Stores co-ordinations of (x,y) in the array as {x, y}
     private int genRate;
-    Q2[] shipmentList; //Each shipment list contains 9 queues. The first element is the next port regarding to port.getPortNum() and so on. Once it reaches the final port num, it loops from beginning
+    Queue[] shipmentList; //Each shipment list contains 9 queues. The first element is the next port regarding to port.getPortNum() and so on. Once it reaches the final port num, it loops from beginning
     private static int counter = 0;
 
     public int getPortNum() {
@@ -21,9 +21,9 @@ public class Port {
             ShippingSim.agenda.add(new ShipmentMaker(this, genRate), 0); //Instantiate instance of shipmentMaker for each port (except moon)
         }
         portNum = counter++; //Assign portNum to port in order each port is added
-        shipmentList = new Q2[9];
+        shipmentList = new Queue[9];
         for (int i = 0; i < 9; i++) {
-            shipmentList[i] = new Q2();
+            shipmentList[i] = new Queue();
         }
     }
 
@@ -32,7 +32,7 @@ public class Port {
         double oldestTime = -1;
         for (int i = 0; i < shipmentList.length; i++) {
             if (shipmentList[i].length() > 0) {
-                Shipment temp = (Shipment) shipmentList[i].getFirst();
+                Shipment temp = (Shipment) shipmentList[i].getFront().getData();
                 if (oldestIndex == -1) {
                     oldestIndex = i;
                     oldestTime = temp.getCreationTime();
