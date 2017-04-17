@@ -2,9 +2,14 @@
 public class Port {
     private String name;
     private double[] location = new double[2]; //Stores co-ordinations of (x,y) in the array as {x, y}
-    private int genRate;
     Queue[] shipmentList; //Each shipment list contains 9 queues. The first element is the next port regarding to port.getPortNum() and so on. Once it reaches the final port num, it loops from beginning
     private static int counter = 0;
+
+    public int getGenRate() {
+        return genRate;
+    }
+
+    private int genRate;
 
     public int getPortNum() {
         return portNum;
@@ -17,9 +22,7 @@ public class Port {
         this.location[0] = portX;
         this.location[1] = portY;
         this.genRate = genRate;
-        if (!name.equals("Moon")) {
-            ShippingSim.agenda.add(new ShipmentMaker(this, genRate), 0); //Instantiate instance of shipmentMaker for each port (except moon)
-        }
+
         portNum = counter++; //Assign portNum to port in order each port is added
         shipmentList = new Queue[9];
         for (int i = 0; i < 9; i++) {

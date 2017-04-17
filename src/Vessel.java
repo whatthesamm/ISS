@@ -23,7 +23,10 @@ public class Vessel {
 
     public void removeCargo() {
         for (int i = 0; i < cargoList.size(); i++){
-            if (cargoList.get(i) != null) cargoList.remove(i);
+            if (cargoList.get(i) != null) {
+                Shipment remove = (Shipment) cargoList.remove(i);
+                Stat.weightDelivered += remove.getWeight();
+            }
         }
         currentWeight = 0;
     }
@@ -34,7 +37,7 @@ public class Vessel {
         if (willItFit(cargo)){
             cargoList.add(cargo);
             currentWeight += cargo.getWeight();
-            System.out.println("Cargo weight " + cargo.getWeight() + "\nCurrent weight: " + currentWeight);
+           // System.out.println("Cargo weight " + cargo.getWeight() + "\nCurrent weight: " + currentWeight);
             return true;
         }
         return false;
@@ -52,4 +55,5 @@ public class Vessel {
     public double percentFull(){
         return currentWeight / capacity;
     }
+
 }

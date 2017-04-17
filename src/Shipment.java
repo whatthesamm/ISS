@@ -3,12 +3,10 @@ public class Shipment {
 
     private int weight;
     private double creationTime;
-    private Port destination;
 
-    public Shipment(int weight, double creationTime, Port destination) {
+    public Shipment(int weight, double creationTime) {
         this.weight = weight;
         this.creationTime = creationTime;
-        this.destination = destination;
     }
 
     public int getWeight() {
@@ -17,9 +15,5 @@ public class Shipment {
 
     public double getCreationTime() {
         return creationTime;
-    }
-
-    public Port getDestination() {
-        return destination;
     }
 }

@@ -13,31 +13,47 @@ public class VesselEvent implements Event {
     }
 
     public void run() {
-
+        int shipmentListDest = 0;
         if (destination == null){ //If the ship has just arrived
-            vessel.removeCargo();
+            if (vessel.percentFull() != 0) {
+                vessel.removeCargo();
+            }
             int dest = port.getOldestShipmentDest();
             if (dest == -1) { //If the ship is at the moon, choose a random port to go to
                 dest = (int) (Math.random() * 9);
             }
-            destination = ShippingSim.portList[(dest + port.getPortNum()+ 1)%9];
+            shipmentListDest = dest;
+            destination = ShippingSim.portList[(dest + port.getPortNum()+ 1)%10];
         }
+        boolean noneFound = false;
+        while ((port.shipmentList[shipmentListDest].length() > 0) && !noneFound){
+            int counter = 0;
+            for (int i = 0; i < port.shipmentList[shipmentListDest].length(); i++){
+                if (port.shipmentList[shipmentListDest].getDataAtIndex(i) == null) break;
+                Shipment temp = (Shipment) port.shipmentList[shipmentListDest].getDataAtIndex(i);
+                if (vessel.willItFit(temp)){
+                    Shipment n = (Shipment)port.shipmentList[shipmentListDest].removeAtIndex(i);
+                    if (n != null) {
+                        vessel.addCargo(n);
+                        counter++;
+                        break;
+                    }
+                }
+            }
+            if (counter == 0) noneFound = true;
+            }
 
-        while ((port.shipmentList[destination.getPortNum()].length() > 0) && (vessel.percentFull() < ShippingSim.c)){
-            vessel.addCargo((Shipment) port.shipmentList[destination.getPortNum()].remove());
-        }
-
-        System.out.println("The length: " + port.shipmentList[destination.getPortNum()].length());
+        //System.out.println("The length: " + port.shipmentList[shipmentListDest].length());
 
         if (timeRemaining == 0 || vessel.percentFull() >= ShippingSim.c){ //If the vessel meets the minimum requirements
-            int distance = (int)(Math.sqrt(Math.pow(port.getLocation()[0] - destination.getLocation()[0], 2) + Math.pow(port.getLocation()[1] - destination.getLocation()[1], 2)));
+            double distance = (Math.sqrt(Math.pow(port.getLocation()[0] - destination.getLocation()[0], 2) + Math.pow(port.getLocation()[1] - destination.getLocation()[1], 2)));
             int elapsedTime = (int) Math.ceil((distance / vessel.getSpeed())*60);
-            int runCost = distance * vessel.getCost();
-            System.out.println("Percent full: " + vessel.percentFull() + "\nPlace of origin: " + port.getName() + "\nDestination: " + destination.getName() + "\nDistance: " + distance + "\nElapsed time: " + elapsedTime + "\n");
+            int runCost = (int) (distance * vessel.getCost());
+            //System.out.println("Time: " + ShippingSim.agenda.getCurrentTime() + "\nPercent full: " + vessel.percentFull() + "\nPlace of origin: " + port.getName() + "\nDestination: " + destination.getName() + "\nDistance: " + distance + "\nElapsed time: " + elapsedTime + "\n");
             ShippingSim.agenda.add(new VesselEvent(destination,vessel,null),elapsedTime); //Schedule a new VesselEvent
         } else {
             timeRemaining--;
-            System.out.println("Waiting with " + timeRemaining + " days left.");
+            //System.out.println("Waiting with " + timeRemaining + " days left.");
             ShippingSim.agenda.add(this,1440);
         }
     }

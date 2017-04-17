@@ -34,6 +34,28 @@ public class Queue implements Q {
         return answer;
     }
 
+    public Object getDataAtIndex(int index){
+        if (index >= size) return null;
+        N temp = front;
+        for (int i = 1; i < index; i++){
+            temp = temp.getNext();
+        }
+        if (temp == null) return null;
+        return temp.getData();
+    }
+
+    public Object removeAtIndex(int index){
+        if (index >= size) return null;
+        N temp = front;
+        for (int i = 2; i < index; i++){
+            temp = temp.getNext();
+        }
+        if (temp.getNext() == null) return null;
+        N nextNode = temp.getNext();
+        temp.setNext(nextNode.getNext());
+        return nextNode.getData();
+    }
+
     public int length() {
         return size;
     }
