@@ -29,13 +29,22 @@ public class ShippingSim {
             new Vessel("Rocket", 10000, 2000, 100000)
     };
 
+    //Variables
+    static double c = .9;
+    static int w = 5;
+    static int shipNum = 4;
+
     //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
     public static void main(String[] args) {
+        //Instantiate VesselEvents
+        agenda.add(new VesselEvent(portList[0],vesselList[shipNum],null),2400);
+
         //agenda.add(new VesselEvent(portList[4], vesselList[0]),20);
-        while (agenda.getCurrentTime() <= 10) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
+        while (agenda.getCurrentTime() <= 10000000) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
 
+        /*
         //Use this to look at package production
         for (int i = 0; i < portList.length; i++){ //i = current port
             Port temp = portList[i];
@@ -46,5 +55,6 @@ public class ShippingSim {
             }
             System.out.println(output +  "\n----------------------------------\n");
         }
+        */
     }
 }

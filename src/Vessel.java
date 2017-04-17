@@ -3,7 +3,8 @@ import java.util.ArrayList;
 //Written by maten009 and nguy2886
 public class Vessel {
     private String name;
-    private int capacity;
+    private double capacity;
+    private int currentWeight = 0;
 
     public int getSpeed() {
         return speed;
@@ -11,7 +12,6 @@ public class Vessel {
 
     private int speed;
     private int cost;
-    private Port destination;
     private ArrayList cargoList = new ArrayList();
 
     public Vessel(String name, int capacity, int speed, int cost) {
@@ -21,16 +21,11 @@ public class Vessel {
         this.cost = cost;
     }
 
-    public int removeCargo() {
-        int counter = 0;
+    public void removeCargo() {
         for (int i = 0; i < cargoList.size(); i++){
-            if (cargoList.get(i) != null){
-                Shipment temp = (Shipment)cargoList.get(i);
-                Stat.weightDelivered += temp.getWeight();
-                counter++;
-            }
+            if (cargoList.get(i) != null) cargoList.remove(i);
         }
-        return counter;
+        currentWeight = 0;
     }
 
     //Need to add loading method, make sure it loads the queue with the oldest shipment
@@ -38,6 +33,8 @@ public class Vessel {
     public boolean addCargo(Shipment cargo){
         if (willItFit(cargo)){
             cargoList.add(cargo);
+            currentWeight += cargo.getWeight();
+            System.out.println("Cargo weight " + cargo.getWeight() + "\nCurrent weight: " + currentWeight);
             return true;
         }
         return false;
@@ -45,15 +42,14 @@ public class Vessel {
 
     public boolean willItFit(Shipment cargo){
         if (cargo == null) return false;
-        int temp = 0;
-        for (Object aCargoList : cargoList) {
-            Shipment tempShip = (Shipment) aCargoList;
-            temp += tempShip.getWeight();
-        }
-        return temp + cargo.getWeight() < capacity;
+        return currentWeight + cargo.getWeight() < capacity;
     }
 
     public int getCost(){
         return cost;
+    }
+
+    public double percentFull(){
+        return currentWeight / capacity;
     }
 }

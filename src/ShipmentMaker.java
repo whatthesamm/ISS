@@ -17,6 +17,6 @@ public class ShipmentMaker implements Event {
             Port destination = ShippingSim.portList[(randNum + port.getPortNum() + 1) % 10]; //Selects random port **This is most likely where we do the moon's 0.1% generation**
             port.shipmentList[randNum].add(new Shipment(weight, creationTime, destination)); //Add the shipment to the designated port queue
         }
-        ShippingSim.agenda.add(this, 1); //ShipmentMaker is added to the queue at a rate of 1 second
+        ShippingSim.agenda.add(new ShipmentMaker(port,genRate), 1440); //ShipmentMaker is added to the queue at a rate of 1 second
     }
 }
