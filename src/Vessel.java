@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-
 //Written by maten009 and nguy2886
 public class Vessel {
     private String name;
     private double capacity;
     private int currentWeight = 0;
+    private int numCargo = 0;
 
     public int getSpeed() {
         return speed;
@@ -12,7 +11,6 @@ public class Vessel {
 
     private int speed;
     private int cost;
-    private ArrayList cargoList = new ArrayList();
 
     public Vessel(String name, int capacity, int speed, int cost) {
         this.name = name;
@@ -22,22 +20,17 @@ public class Vessel {
     }
 
     public void removeCargo() {
-        for (int i = 0; i < cargoList.size(); i++){
-            if (cargoList.get(i) != null) {
-                Shipment remove = (Shipment) cargoList.remove(i);
-                Stat.weightDelivered += remove.getWeight();
-            }
-        }
+        Stat.weightDelivered += currentWeight;
         currentWeight = 0;
+        numCargo = 0;
     }
 
     //Need to add loading method, make sure it loads the queue with the oldest shipment
 
     public boolean addCargo(Shipment cargo){
         if (willItFit(cargo)){
-            cargoList.add(cargo);
             currentWeight += cargo.getWeight();
-           // System.out.println("Cargo weight " + cargo.getWeight() + "\nCurrent weight: " + currentWeight);
+            numCargo++;
             return true;
         }
         return false;
