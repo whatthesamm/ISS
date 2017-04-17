@@ -14,7 +14,19 @@ public class ShipmentMaker implements Event {
             int randNum = (int) (Math.random() * 9); //Randomly number between 0-8
             int weight = (int) (Math.random() * 1000) + 1; //Random weight of given package
             double creationTime = ShippingSim.agenda.getCurrentTime(); //Time created
-            Port destination = ShippingSim.portList[(randNum + port.getPortNum() + 1) % 10]; //Selects random port **This is most likely where we do the moon's 0.1% generation**
+
+            Port current = ShippingSim.portList[port.getPortNum()]; //Stores current port
+            Port destination = ShippingSim.portList[(randNum + port.getPortNum() + 1) % 10]; //Selects random destination port
+
+            if (destination.getName() == "Moon") { //This will enter a loop to determine if the moon will become the true destination with a 0.1% chance
+                int chance = (int) (Math.random() * 1000 % 1000); //1000 is for 1/1000 = 0.001 = 0.1% chance, will produce that chance to accept shipment to moon
+                if (chance != 0) { //If chance fails to become 0, it will find a different destination
+                    while (destination == current || destination.getName() == "Moon") { //Safeguard to ensure it won't select the new destination to itself or the moon
+                        destination = ShippingSim.portList[(randNum + destination.getPortNum() + 1) % 10]; //Selects new port after Moon's failure to become the destination
+                    }
+                }
+            }
+
             port.shipmentList[randNum].add(new Shipment(weight, creationTime, destination)); //Add the shipment to the designated port queue
         }
         ShippingSim.agenda.add(new ShipmentMaker(port,genRate), 1440); //ShipmentMaker is added to the queue at a rate of 1 second
