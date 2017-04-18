@@ -6,5 +6,8 @@ public class Stat {
     static int P = 0; //Average profit per shipment
     static int shipped = 0; //How many was shipped
     static int moonCounter = 0;
+    static int profit = 0;
+    static int shipsDeparted = 0;
+    static int daysWaited = 0;
 
 }

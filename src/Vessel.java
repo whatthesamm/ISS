@@ -31,7 +31,7 @@ public class Vessel {
     }
 
     public void removeCargo(boolean PirateTown) {
-        System.out.println("Profit: " + currentWeight * 10 + "-"+ distanceTravelled * cost + "=" + ((currentWeight*10)-(distanceTravelled*cost)));
+        Stat.profit += (currentWeight*10)-(distanceTravelled*cost);
         Stat.weightDelivered += currentWeight;
         currentWeight = 0;
         numCargo = 0;

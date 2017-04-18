@@ -32,8 +32,8 @@ public class ShippingSim {
     //Variables
     static double c = .9;
     static int w = 5;
-    static int shipNum = 0;
-    static int numOfShip = 100;
+    static int shipNum = 6;
+    static int numOfShip = 30;
 
     //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
     public static void main(String[] args) {
@@ -44,7 +44,7 @@ public class ShippingSim {
         //Instantiate VesselEvents
         Vessel temp = vesselList[shipNum];
         for (int i = 0; i < numOfShip; i++) {
-            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), i*2);
+            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), 0);
         }
 
 
@@ -53,6 +53,9 @@ public class ShippingSim {
         }
         System.out.println("Weight delivered: " + Stat.weightDelivered);
         System.out.println("Moon deliveries: " + Stat.moonCounter);
+        System.out.println("Profit total: " + Stat.profit);
+        System.out.println("Avg days waited: " + Stat.daysWaited/Stat.shipsDeparted);
+        System.out.println("Avg. profit: " + Stat.profit/Stat.shipsDeparted);
 
 
         //Use this to look at package production
