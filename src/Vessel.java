@@ -1,25 +1,37 @@
 //Written by maten009 and nguy2886
 public class Vessel {
-    private String name;
     private double capacity;
     private int currentWeight = 0;
     private int numCargo = 0;
-
-    public int getSpeed() {
-        return speed;
-    }
-
     private int speed;
     private int cost;
 
-    public Vessel(String name, int capacity, int speed, int cost) {
-        this.name = name;
+    public int getDistanceTravelled() {
+        return distanceTravelled;
+    }
+
+    public void setDistanceTravelled(int distanceTravelled) {
+        this.distanceTravelled = distanceTravelled;
+    }
+
+    private int distanceTravelled = 0;
+
+    public Vessel(double capacity, int speed, int cost) {
         this.capacity = capacity;
         this.speed = speed;
         this.cost = cost;
     }
 
+    public double getCapacity() {
+        return capacity;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
     public void removeCargo(boolean PirateTown) {
+        System.out.println("Profit: " + currentWeight * 10 + "-"+ distanceTravelled * cost + "=" + ((currentWeight*10)-(distanceTravelled*cost)));
         Stat.weightDelivered += currentWeight;
         currentWeight = 0;
         numCargo = 0;

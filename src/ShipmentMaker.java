@@ -7,11 +7,9 @@ public class ShipmentMaker implements Event {
     public ShipmentMaker(Port portName, int genRate) {
         port = portName;
         this.genRate = genRate;
-        System.out.println(portName.getName() + " " + genRate);
     }
 
     public void run() {
-        int counter = 0;
         for (int i = 0; i < genRate; i++) { //Creates genRate number of packages per day based on the port
             int randNum = (int) (Math.random() * 9); //Randomly number between 0-8
             int weight = (int) (Math.random() * 1000) + 1; //Random weight of given package
@@ -28,9 +26,7 @@ public class ShipmentMaker implements Event {
                     }
                 }
             }
-            if (port.getName().equals("Minneapolis")){
-                System.out.println("Thing added " + counter++);
-            }
+            if (destination.getName().equals("Moon")) Stat.moonCounter++;
             port.shipmentList[randNum].add(new Shipment(weight, creationTime)); //Add the shipment to the designated port queue
         }
         ShippingSim.agenda.add(this, 1440); //ShipmentMaker is added to the queue at a rate of 1 day

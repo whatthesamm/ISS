@@ -1,20 +1,10 @@
 //Written by maten009 and nguy2886
 public class Port {
+    private static int counter = 0;
+    Queue[] shipmentList; //Each shipment list contains 9 queues. The first element is the next port regarding to port.getPortNum() and so on. Once it reaches the final port num, it loops from beginning
     private String name;
     private double[] location = new double[2]; //Stores co-ordinations of (x,y) in the array as {x, y}
-    Queue[] shipmentList; //Each shipment list contains 9 queues. The first element is the next port regarding to port.getPortNum() and so on. Once it reaches the final port num, it loops from beginning
-    private static int counter = 0;
-
-    public int getGenRate() {
-        return genRate;
-    }
-
     private int genRate;
-
-    public int getPortNum() {
-        return portNum;
-    }
-
     private int portNum;
 
     public Port(String name, int portX, int portY, int genRate) {
@@ -51,6 +41,11 @@ public class Port {
     public double[] getLocation() {
         return location;
     }
+
     public String getName() { return name; }
+
+    public int getGenRate() { return genRate; }
+
+    public int getPortNum() { return portNum; }
 }
 

@@ -5,5 +5,6 @@ public class Stat {
     static int W = 0; //Maximum time a shipment spends waiting at a part
     static int P = 0; //Average profit per shipment
     static int shipped = 0; //How many was shipped
+    static int moonCounter = 0;
 
 }

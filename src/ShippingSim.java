@@ -19,20 +19,21 @@ public class ShippingSim {
 
     //A list of vessels, so we can easily access it
     static Vessel[] vesselList = { //Vessel(name, capacity, speed, cost)
-            new Vessel("Canoe", 1000, 10, 1),
-            new Vessel("Yacht", 2000, 60, 2000),
-            new Vessel("Galleon", 15000, 15, 100),
-            new Vessel("Barge", 1000000, 10, 1000),
-            new Vessel("Freighter", 2000000, 5, 1000),
-            new Vessel("Airplane", 50000, 850, 10000),
-            new Vessel("Carrier Pigeon Team", 1000, 10, 0),
-            new Vessel("Rocket", 10000, 2000, 100000)
+            new Vessel(1000, 10, 1), //Canoe x100
+            new Vessel(2000, 60, 2000), //Yacht x10
+            new Vessel(15000, 15, 100), //Galleon x20
+            new Vessel(1000000, 10, 1000), //Barge x15
+            new Vessel(2000000, 5, 1000), //Freighter x10
+            new Vessel(50000, 850, 10000), //Airplane x5
+            new Vessel(1000, 10, 0), //Carrier Pigeon Team x30
+            new Vessel(10000, 2000, 100000) //Rocket x10
     };
 
     //Variables
     static double c = .9;
     static int w = 5;
-    static int shipNum = 3;
+    static int shipNum = 0;
+    static int numOfShip = 100;
 
     //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
     public static void main(String[] args) {
@@ -41,18 +42,21 @@ public class ShippingSim {
             agenda.add(new ShipmentMaker(portList[i],portList[i].getGenRate()),0);
         }
         //Instantiate VesselEvents
-        /*
-        for (int i = 0; i < 10; i++) {
-            agenda.add(new VesselEvent(portList[i], new Vessel("Galleon", 15000, 15, 100), null), i*100);
+        Vessel temp = vesselList[shipNum];
+        for (int i = 0; i < numOfShip; i++) {
+            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), i*2);
         }
-        */
 
-        while (agenda.getCurrentTime() < 2000) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
+
+        while (agenda.getCurrentTime() < 131400) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
         System.out.println("Weight delivered: " + Stat.weightDelivered);
+        System.out.println("Moon deliveries: " + Stat.moonCounter);
+
 
         //Use this to look at package production
+        /*
         for (int i = 0; i < portList.length; i++){ //i = current port
             Port temp = portList[i];
             String output = "";
@@ -62,6 +66,7 @@ public class ShippingSim {
             }
             System.out.println(output +  "\n----------------------------------\n");
         }
+        */
 
     }
 }
