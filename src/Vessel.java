@@ -5,21 +5,16 @@ public class Vessel {
     private int numCargo = 0;
     private int speed;
     private int cost;
-
-    public int getDistanceTravelled() {
-        return distanceTravelled;
-    }
-
-    public void setDistanceTravelled(int distanceTravelled) {
-        this.distanceTravelled = distanceTravelled;
-    }
-
     private int distanceTravelled = 0;
 
     public Vessel(double capacity, int speed, int cost) {
         this.capacity = capacity;
         this.speed = speed;
         this.cost = cost;
+    }
+
+    public void setDistanceTravelled(int distanceTravelled) {
+        this.distanceTravelled = distanceTravelled;
     }
 
     public double getCapacity() {
@@ -31,22 +26,19 @@ public class Vessel {
     }
 
     public void removeCargo(boolean PirateTown) {
-        Stat.profit += (currentWeight*10)-(distanceTravelled*cost);
-        Stat.weightDelivered += currentWeight;
+        int chance = (int) (Math.random() * 10); //10% chance, hence 1/10
+        if (PirateTown && chance == 0) { //If PirateTown is the destination
+            //Do nothing
+        } else {//Track stats
+            Stat.profit += (currentWeight * 10) - (distanceTravelled * cost);
+            Stat.weightDelivered += currentWeight;
+        }
         currentWeight = 0;
         numCargo = 0;
-        if (PirateTown) { //If PirateTown is the destination
-            int chance = (int) (Math.random() * 10) % 10; //10% chance, hence 1/10
-            if (chance == 0){
-                //No profits gained
-            }
-        }
     }
 
-    //Need to add loading method, make sure it loads the queue with the oldest shipment
-
-    public boolean addCargo(Shipment cargo){
-        if (willItFit(cargo)){
+    public boolean addCargo(Shipment cargo) { //Load cargo onto the ship
+        if (willItFit(cargo)) {
             currentWeight += cargo.getWeight();
             numCargo++;
             return true;
@@ -54,16 +46,16 @@ public class Vessel {
         return false;
     }
 
-    public boolean willItFit(Shipment cargo){
+    public boolean willItFit(Shipment cargo) { //Check if the cargo will fit on the boat
         if (cargo == null) return false;
         return currentWeight + cargo.getWeight() < capacity;
     }
 
-    public int getCost(){
+    public int getCost() {
         return cost;
     }
 
-    public double percentFull(){
+    public double percentFull() {
         return currentWeight / capacity;
     }
 

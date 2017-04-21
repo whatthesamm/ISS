@@ -35,7 +35,7 @@ public class Port {
                 }
             }
         }
-        return oldestIndex;
+        return oldestIndex; //Returns the index of the ports location in the Queue list
     }
 
     public double[] getLocation() {

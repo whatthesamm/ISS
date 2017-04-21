@@ -1,6 +1,6 @@
 //Written by maten009 and nguy2886
 public class ShipmentMaker implements Event {
-
+    //Generates shipments for each port
     private Port port;
     private int genRate;
 

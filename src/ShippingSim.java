@@ -5,7 +5,7 @@ public class ShippingSim {
 
     //A list of ports, so we can easily access it
     static Port[] portList = { //Port(name, x, y, genRate)
-            new Port("Minneapolis", 0, 0, 50), //Generates twice as many as necessary on first run, don't know why
+            new Port("Minneapolis", 0, 0, 50),
             new Port("Saint Paul", 0, 10, 50),
             new Port("Antarctica", 0, -6000, 10),
             new Port("Japan", 4000, 4000, 100),
@@ -17,7 +17,7 @@ public class ShippingSim {
             new Port("Pirate Town", 3000, 3000, 100)
     };
 
-    //A list of vessels, so we can easily access it
+    //A list of vessels, so we can easily access it ONLY FOR REFERENCE
     static Vessel[] vesselList = { //Vessel(name, capacity, speed, cost)
             new Vessel(1000, 10, 1), //Canoe x100
             new Vessel(2000, 60, 2000), //Yacht x10
@@ -30,12 +30,12 @@ public class ShippingSim {
     };
 
     //Variables
-    static double c = .9;
-    static int w = 5;
-    static int shipNum = 6;
-    static int numOfShip = 30;
+    static double c = .9; //Minimum percentage for ship
+    static int w = 5; //Days to wait for more cargo
+    static int shipNum = 3; //Which ship we're using
+    static int numOfShip = 15; //How many vessels we have
+    static int time = 131400; //How long to run simulation (minutes)
 
-    //This will run our international shipping simulation according to 10,000 seconds. We can change the time if we need to for other statistics.
     public static void main(String[] args) {
         //Instantiate port shipmentMakers
         for (int i = 0; i < portList.length; i++){
@@ -48,7 +48,7 @@ public class ShippingSim {
         }
 
 
-        while (agenda.getCurrentTime() < 131400) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
+        while (agenda.getCurrentTime() < time) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
         System.out.println("Weight delivered: " + Stat.weightDelivered);

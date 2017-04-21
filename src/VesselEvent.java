@@ -15,26 +15,28 @@ public class VesselEvent implements Event {
     public void run() {
         int shipmentListDest = 0;
         if (destination == null){ //If the ship has just arrived
-            if (vessel.percentFull() != 0) {
+            if (port.getName().equals("Pirate Town")){ //Pirate town is a special case
+                vessel.removeCargo(true);
+            } else if (vessel.percentFull() != 0) {
                 vessel.removeCargo(false);
             }
-            int dest = port.getOldestShipmentDest();
+
+            int dest = port.getOldestShipmentDest(); //Get the index of the queue with the oldest shipment, returns -1 if at moon
             if (dest == -1) { //If the ship is at the moon, choose a random port to go to
-                dest = (int) (Math.random() * 9);
+                dest = (int) (Math.random() * 9); //Just go to any of the other ports
             }
-            shipmentListDest = dest;
-            destination = ShippingSim.portList[(dest + port.getPortNum()+ 1)%10];
+            shipmentListDest = dest; //This will be used later
+            destination = ShippingSim.portList[(dest + port.getPortNum()+ 1)%10]; //Pick the next port to go to
         }
 
 
-
+        //Load cargo until there is no more, the ship has reached capacity, or the min weight is reached
         while (port.shipmentList[shipmentListDest].length() > 0 && vessel.percentFull() < ShippingSim.c && vessel.willItFit((Shipment)port.shipmentList[shipmentListDest].getFront().getData())){
             vessel.addCargo((Shipment)port.shipmentList[shipmentListDest].remove());
             Stat.shipped++;
         }
-        //If the next item in the queue is too big to fit, then just leave
 
-        boolean nextItemTooBig = false;
+        boolean nextItemTooBig = false; //If the next item is too big to fit, then make this true so the ship can leave
         if (port.shipmentList[shipmentListDest].getFront()!= null && !vessel.willItFit((Shipment)port.shipmentList[shipmentListDest].getFront().getData())){
             nextItemTooBig = true;
         }
@@ -48,8 +50,8 @@ public class VesselEvent implements Event {
             Stat.daysWaited += ShippingSim.w - timeRemaining; //How many days the vessel waited
             Stat.shipsDeparted++; //How many ships left
         } else {
-            timeRemaining--;
-            ShippingSim.agenda.add(this,1440);
+            timeRemaining--; //Another day has passed
+            ShippingSim.agenda.add(this,1440); //Try again in a day
         }
     }
 }
