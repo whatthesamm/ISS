@@ -46,9 +46,9 @@ public class ShippingSim {
 
     //Variables
     static double c = .5; //Minimum percentage for ship
-    static int w = 1; //Days to wait for more cargo
-    static int shipNum = 0; //Which ship we're using
-    static int numOfShip = 100; //How many vessels we have
+    static int w = 2; //Days to wait for more cargo
+    static int shipNum = 1; //Which ship we're using
+    static int numOfShip = 10; //How many vessels we have
     static int time = 131400; //How long to run simulation (minutes)
 
     public static void main(String[] args) {
@@ -63,14 +63,14 @@ public class ShippingSim {
         //Instantiate VesselEvents
         Vessel temp = vesselList[shipNum];
         for (int i = 0; i < numOfShip; i++) {
-            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), 0);
+            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), 10+i);
         }
 
 
         while (agenda.getCurrentTime() < time) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
-        /*
+/*
         System.out.println("Weight delivered: " + Stat.weightDelivered);
         System.out.println("Moon deliveries: " + Stat.moonCounter);
         System.out.println("Profit total: " + Stat.profit);
@@ -83,15 +83,14 @@ public class ShippingSim {
         //Use this to look at package production
 
         for (int i = 0; i < portList.length; i++){ //i = current port
-            Port temp = portList[i];
+            Port tem2 = portList[i];
             String output = "";
-            for (int p = 0; p < temp.shipmentList.length; p++){ //p = destination port
-                int count = temp.shipmentList[p].length(); //Returns the number of packages
+            for (int p = 0; p < tem2.shipmentList.length; p++){ //p = destination port
+                int count = tem2.shipmentList[p].length(); //Returns the number of packages
                 output += portList[i].getName() + " with " + count + " packages going to " + portList[(i+p+1)%10].getName() + "\n";
             }
             System.out.println(output +  "\n----------------------------------\n");
         }
-        */
-
+*/
     }
 }

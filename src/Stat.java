@@ -6,11 +6,13 @@ public class Stat {
     static int P = 0; //Average profit per shipment
     static int shipped = 0; //How many was shipped
     static int moonCounter = 0;
-    static int profit = 0;
+    static long profit = 0;
     static double shipsDeparted = 0;
     static int daysWaited = 0;
     static double percentFull = 0;
-
+    static double avgDayWait = 0;
+    static double avgProfit = 0;
+    static double avgPercent = 0;
     static void restart(){
         weightDelivered = 0;
         W = 0; //Maximum time a shipment spends waiting at a part
@@ -21,6 +23,8 @@ public class Stat {
         shipsDeparted = 0;
         daysWaited = 0;
         percentFull = 0;
+        avgProfit = 0;
+        avgDayWait = 0;
     }
 
 }
