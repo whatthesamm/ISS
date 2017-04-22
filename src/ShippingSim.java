@@ -46,9 +46,9 @@ public class ShippingSim {
 
     //Variables
     static double c = .9; //Minimum percentage for ship
-    static int w = 30; //Days to wait for more cargo
-    static int shipNum = 4; //Which ship we're using
-    static int numOfShip = 10; //How many vessels we have
+    static int w = 89; //Days to wait for more cargo
+    static int shipNum = 3; //Which ship we're using
+    static int numOfShip = 15; //How many vessels we have
     static int time = (43800*3); //How long to run simulation (minutes)
 
     public static void main(String[] args) {

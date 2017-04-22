@@ -7,12 +7,11 @@ public class Collecter {
         for (int i = 0; i < timesRun; i++){
             test();
         }
-        System.out.println("Weight delivered: " + weightDelivered/timesRun);
-        System.out.println("Moon deliveries: " + moonCounter/timesRun);
-        System.out.println("Profit total: " + profit/timesRun);
+        System.out.println("Weight delivered: " + (int)(weightDelivered/timesRun));
+        System.out.println("Profit total: " + (int)(profit/timesRun));
         System.out.println("Avg days waited: " + ((daysWaited/timesRun)/(shipsDeparted/timesRun)));
-        System.out.println("Avg. profit: " + ((profit/timesRun)/(shipsDeparted/timesRun)));
-        System.out.println("Avg. percentFull: " + ((percentFull/timesRun)/(shipsDeparted/timesRun)));
+        System.out.println("Avg. profit: " + (int)((profit/timesRun)/(shipsDeparted/timesRun)));
+        System.out.println("Avg. percentFull: " + (((percentFull/timesRun)/(shipsDeparted/timesRun))));
     }
     static long weightDelivered = 0;
     static int W = 0; //Maximum time a shipment spends waiting at a part
