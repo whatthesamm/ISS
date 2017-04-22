@@ -7,7 +7,20 @@ public class Stat {
     static int shipped = 0; //How many was shipped
     static int moonCounter = 0;
     static int profit = 0;
-    static int shipsDeparted = 0;
+    static double shipsDeparted = 0;
     static int daysWaited = 0;
+    static double percentFull = 0;
+
+    static void restart(){
+        weightDelivered = 0;
+        W = 0; //Maximum time a shipment spends waiting at a part
+        P = 0; //Average profit per shipment
+        shipped = 0; //How many was shipped
+        moonCounter = 0;
+        profit = 0;
+        shipsDeparted = 0;
+        daysWaited = 0;
+        percentFull = 0;
+    }
 
 }

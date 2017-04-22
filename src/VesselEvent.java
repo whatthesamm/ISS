@@ -49,6 +49,7 @@ public class VesselEvent implements Event {
             vessel.setDistanceTravelled((int)distance);
             Stat.daysWaited += ShippingSim.w - timeRemaining; //How many days the vessel waited
             Stat.shipsDeparted++; //How many ships left
+            Stat.percentFull += vessel.percentFull();
         } else {
             timeRemaining--; //Another day has passed
             ShippingSim.agenda.add(this,1440); //Try again in a day

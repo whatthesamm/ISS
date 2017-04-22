@@ -17,6 +17,21 @@ public class ShippingSim {
             new Port("Pirate Town", 3000, 3000, 100)
     };
 
+    static void refresh(){
+        portList = new Port[]{ //Port(name, x, y, genRate)
+                new Port("Minneapolis", 0, 0, 50),
+                new Port("Saint Paul", 0, 10, 50),
+                new Port("Antarctica", 0, -6000, 10),
+                new Port("Japan", 4000, 4000, 100),
+                new Port("Korea", 6000, 5000, 50),
+                new Port("China", 5000, 6000, 1000),
+                new Port("Moon", 0, 1000000, 0),
+                new Port("Panama", 1000, 3000, 50),
+                new Port("Hawaii", 2000, 2000, 50),
+                new Port("Pirate Town", 3000, 3000, 100)
+        };
+    }
+
     //A list of vessels, so we can easily access it ONLY FOR REFERENCE
     static Vessel[] vesselList = { //Vessel(name, capacity, speed, cost)
             new Vessel(1000, 10, 1), //Canoe x100
@@ -30,13 +45,17 @@ public class ShippingSim {
     };
 
     //Variables
-    static double c = .9; //Minimum percentage for ship
-    static int w = 5; //Days to wait for more cargo
-    static int shipNum = 3; //Which ship we're using
-    static int numOfShip = 15; //How many vessels we have
+    static double c = .5; //Minimum percentage for ship
+    static int w = 1; //Days to wait for more cargo
+    static int shipNum = 0; //Which ship we're using
+    static int numOfShip = 100; //How many vessels we have
     static int time = 131400; //How long to run simulation (minutes)
 
     public static void main(String[] args) {
+        //Reset statistics for multiple runs
+        Stat.restart();
+        //Refresh ports
+        refresh();
         //Instantiate port shipmentMakers
         for (int i = 0; i < portList.length; i++){
             agenda.add(new ShipmentMaker(portList[i],portList[i].getGenRate()),0);
@@ -51,15 +70,18 @@ public class ShippingSim {
         while (agenda.getCurrentTime() < time) { //This will loop until all of the events went for a duration of at least 10,000 or whatever else we set the time to
             agenda.remove().run();
         }
+        /*
         System.out.println("Weight delivered: " + Stat.weightDelivered);
         System.out.println("Moon deliveries: " + Stat.moonCounter);
         System.out.println("Profit total: " + Stat.profit);
         System.out.println("Avg days waited: " + Stat.daysWaited/Stat.shipsDeparted);
         System.out.println("Avg. profit: " + Stat.profit/Stat.shipsDeparted);
+        System.out.println("Avg. percentFull: " + Stat.percentFull/Stat.shipsDeparted);
+        System.out.println("Avg. trips per vessel: " + Stat.shipsDeparted/numOfShip);
 
 
         //Use this to look at package production
-        /*
+
         for (int i = 0; i < portList.length; i++){ //i = current port
             Port temp = portList[i];
             String output = "";
