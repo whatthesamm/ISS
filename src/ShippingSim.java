@@ -45,17 +45,17 @@ public class ShippingSim {
     };
 
     //Variables
-    static double c = .5; //Minimum percentage for ship
-    static int w = 2; //Days to wait for more cargo
-    static int shipNum = 2; //Which ship we're using
-    static int numOfShip = 20; //How many vessels we have
-    static int time = 131400; //How long to run simulation (minutes)
+    static double c = .9; //Minimum percentage for ship
+    static int w = 30; //Days to wait for more cargo
+    static int shipNum = 4; //Which ship we're using
+    static int numOfShip = 10; //How many vessels we have
+    static int time = (43800*3); //How long to run simulation (minutes)
 
     public static void main(String[] args) {
         //Reset statistics for multiple runs
-        Stat.restart();
         //Refresh ports
         refresh();
+        Stat.restart();
         //Instantiate port shipmentMakers
         for (int i = 0; i < portList.length; i++){
             agenda.add(new ShipmentMaker(portList[i],portList[i].getGenRate()),0);
@@ -78,7 +78,6 @@ public class ShippingSim {
         System.out.println("Avg. profit: " + Stat.profit/Stat.shipsDeparted);
         System.out.println("Avg. percentFull: " + Stat.percentFull/Stat.shipsDeparted);
         System.out.println("Avg. trips per vessel: " + Stat.shipsDeparted/numOfShip);
-
 
         //Use this to look at package production
 
