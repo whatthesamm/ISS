@@ -47,8 +47,8 @@ public class ShippingSim {
     //Variables
     static double c = .5; //Minimum percentage for ship
     static int w = 2; //Days to wait for more cargo
-    static int shipNum = 1; //Which ship we're using
-    static int numOfShip = 10; //How many vessels we have
+    static int shipNum = 2; //Which ship we're using
+    static int numOfShip = 20; //How many vessels we have
     static int time = 131400; //How long to run simulation (minutes)
 
     public static void main(String[] args) {
@@ -63,7 +63,7 @@ public class ShippingSim {
         //Instantiate VesselEvents
         Vessel temp = vesselList[shipNum];
         for (int i = 0; i < numOfShip; i++) {
-            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), 10+i);
+            agenda.add(new VesselEvent(portList[i%10], new Vessel(temp.getCapacity(), temp.getSpeed(), temp.getCost()), null), 10);
         }
 
 
